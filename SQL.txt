@@ -128,6 +128,26 @@ from pc
 group by hd
 having count(model)>1
 
+Задание: 16
+Найдите пары моделей PC, имеющих одинаковые скорость и RAM. В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
+
+Select distinct  pc1.model, pc2.model, pc1.speed, pc1.ram
+from pc pc1, pc pc2
+WHERE pc1.speed = pc2.speed and pc1.ram=pc2.ram and pc1.model>pc2.model
+Group by pc1.model, pc2.model, pc1.speed, pc1.ram
+Order by 
+pc1.model, pc2.model, pc1.speed, pc1.ram
+
+Задание: 17 (Serge I: 2003-02-03)
+Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
+Вывести: type, model, speed
+
+Select distinct p.type, l.model, l.speed
+From product p
+join laptop l on p.model=l.model
+Where l.speed < all (select speed from pc)
+
+
 
 Краткая информация о базе данных "Корабли":
 
