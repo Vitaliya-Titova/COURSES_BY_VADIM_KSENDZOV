@@ -138,7 +138,7 @@ Group by pc1.model, pc2.model, pc1.speed, pc1.ram
 Order by 
 pc1.model, pc2.model, pc1.speed, pc1.ram
 
-Задание: 17 (Serge I: 2003-02-03)
+Задание: 17
 Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
 Вывести: type, model, speed
 
@@ -146,6 +146,69 @@ Select distinct p.type, l.model, l.speed
 From product p
 join laptop l on p.model=l.model
 Where l.speed < all (select speed from pc)
+
+
+Задание: 18 
+Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price
+
+Select DISTINCT product.maker, price
+from product 
+JOIN printer on product.model=printer.model
+where price = (select min(price) from printer where printer.color='y') and printer.color='y'
+
+Задание: 19 
+Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов.
+Вывести: maker, средний размер экрана.
+
+Select product.maker, avg(screen) as size
+from laptop l 
+join product on l.model=product.model
+group by product.maker
+
+Задание: 20
+Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+
+Select distinct maker, count(model) as a
+from product 
+where type='pc'
+group by maker
+having count(model) > '2'
+
+
+Задание: 21 
+Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC.
+Вывести: maker, максимальная цена.
+
+Select p.maker, max(pc.price) as max
+from product p
+join pc on p.model=pc.model
+group by p.maker
+
+Задание: 22
+Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
+
+Select speed, avg(price) as price
+from pc
+where speed > '600'
+group by speed
+
+Задание: 23
+Найдите производителей, которые производили бы как ПК
+со скоростью не менее 750 МГц, так и ПК-блокноты со скоростью не менее 750 МГц.
+Вывести: Maker
+
+Select distinct p.maker 
+from product p
+join pc on pc.model=p.model
+where pc.speed >= '750'
+INTERSECT
+select distinct p.maker
+from product p
+join laptop l on l.model=p.model
+where l.speed >= '750'
+
+
+
 
 
 
