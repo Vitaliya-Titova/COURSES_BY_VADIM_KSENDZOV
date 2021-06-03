@@ -207,6 +207,28 @@ from product p
 join laptop l on l.model=p.model
 where l.speed >= '750'
 
+Задание: 24 
+Перечислите номера моделей любых типов, имеющих самую высокую цену по всей имеющейся в базе данных продукции.
+
+with model_out as (
+select model,price from laptop 
+union all 
+select model,price from printer
+union all
+select model,price from pc)
+select model from model_out where price = all (select max(price) from model_out)
+group by model
+
+Задание: 25
+Найдите производителей принтеров, которые производят ПК с наименьшим объемом RAM и с самым быстрым процессором среди всех ПК, имеющих наименьший объем RAM. Вывести: Maker
+
+Select distinct p.maker
+from product p
+join pc on p.model=pc.model
+where pc.ram = (select min(ram) from pc) and 
+pc.speed = (select max(speed) from pc where ram=(select min(ram) from pc)) and 
+p.maker in ( select maker from product where type='printer')
+
 
 
 
