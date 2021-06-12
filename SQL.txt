@@ -230,6 +230,12 @@ pc.speed = (select max(speed) from pc where ram=(select min(ram) from pc)) and
 p.maker in ( select maker from product where type='printer')
 
 
+Задание: 28
+Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
+Select count(distinct maker) as kol
+From product
+Where maker in (select maker 
+from product group by maker having count (model)=1)
 
 
 
