@@ -7,12 +7,14 @@ Laptop(code, model, speed, ram, hd, price, screen)
 Printer(code, model, color, type, price)
 Таблица Product представляет производителя (maker), номер модели (model) и тип ('PC' - ПК, 'Laptop' - ПК-блокнот или 'Printer' - принтер). Предполагается, что номера моделей в таблице Product уникальны для всех производителей и типов продуктов. В таблице PC для каждого ПК, однозначно определяемого уникальным кодом – code, указаны модель – model (внешний ключ к таблице Product), скорость - speed (процессора в мегагерцах), объем памяти - ram (в мегабайтах), размер диска - hd (в гигабайтах), скорость считывающего устройства - cd (например, '4x') и цена - price. Таблица Laptop аналогична таблице РС за исключением того, что вместо скорости CD содержит размер экрана -screen (в дюймах). В таблице Printer для каждой модели принтера указывается, является ли он цветным - color ('y', если цветной), тип принтера - type (лазерный – 'Laser', струйный – 'Jet' или матричный – 'Matrix') и цена - price.
 
+
 Задание: 1 
 Найдите номер модели, скорость и размер жесткого диска для всех ПК стоимостью менее 500 дол. Вывести: model, speed и hd
 
 select distinct model,speed,hd
 from pc
 where price <'500'
+
 
 Задание: 2 
 Найдите производителей принтеров. Вывести: maker
@@ -21,12 +23,14 @@ select distinct maker
 from product
 where type='printer'
 
+
 Задание: 3
 Найдите номер модели, объем памяти и размеры экранов ПК-блокнотов, цена которых превышает 1000 дол.
 
 Select distinct model, ram, screen
 from laptop
 where price >'1000'
+
 
 Задание: 4 
 Найдите все записи таблицы Printer для цветных принтеров.
@@ -35,12 +39,14 @@ Select *
 from printer
 where color='y'
 
+
 Задание: 5
 Найдите номер модели, скорость и размер жесткого диска ПК, имеющих 12x или 24x CD и цену менее 600 дол.
 
 Select model, speed, hd
 from pc
 where (cd = '12x' or cd = '24x') and price <'600'
+
 
 Задание: 6
 Для каждого производителя, выпускающего ПК-блокноты c объёмом жесткого диска не менее 10 Гбайт, найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.
@@ -50,6 +56,7 @@ from product
 join laptop on laptop.model=product.model
 where 
 hd>='10'
+
 
 Задание: 7
 Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
@@ -99,11 +106,13 @@ From printer
 Where price =(select max(price)
 From printer)
 
+
 Задание: 11 
 Найдите среднюю скорость ПК.
 
 Select avg(speed) as avg_speed
 From pc
+
 
 Задание: 12 
 Найдите среднюю скорость ПК-блокнотов, цена которых превышает 1000 дол.
@@ -111,6 +120,7 @@ From pc
 Select avg(speed) as avg_speed
 From laptop 
 Where price >1000
+
 
 Задание: 13 
 Найдите среднюю скорость ПК, выпущенных производителем A.
@@ -120,6 +130,7 @@ From pc
 Join product p on p.model =pc.model
 Where maker = 'A'
 
+
 Задание: 15 
 Найдите размеры жестких дисков, совпадающих у двух и более PC. Вывести: HD
 
@@ -127,6 +138,7 @@ SELECT distinct hd
 from pc
 group by hd
 having count(model)>1
+
 
 Задание: 16
 Найдите пары моделей PC, имеющих одинаковые скорость и RAM. В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
@@ -137,6 +149,7 @@ WHERE pc1.speed = pc2.speed and pc1.ram=pc2.ram and pc1.model>pc2.model
 Group by pc1.model, pc2.model, pc1.speed, pc1.ram
 Order by 
 pc1.model, pc2.model, pc1.speed, pc1.ram
+
 
 Задание: 17
 Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
@@ -156,6 +169,7 @@ from product
 JOIN printer on product.model=printer.model
 where price = (select min(price) from printer where printer.color='y') and printer.color='y'
 
+
 Задание: 19 
 Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов.
 Вывести: maker, средний размер экрана.
@@ -164,6 +178,7 @@ Select product.maker, avg(screen) as size
 from laptop l 
 join product on l.model=product.model
 group by product.maker
+
 
 Задание: 20
 Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
@@ -184,6 +199,7 @@ from product p
 join pc on p.model=pc.model
 group by p.maker
 
+
 Задание: 22
 Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
 
@@ -191,6 +207,7 @@ Select speed, avg(price) as price
 from pc
 where speed > '600'
 group by speed
+
 
 Задание: 23
 Найдите производителей, которые производили бы как ПК
@@ -207,6 +224,7 @@ from product p
 join laptop l on l.model=p.model
 where l.speed >= '750'
 
+
 Задание: 24 
 Перечислите номера моделей любых типов, имеющих самую высокую цену по всей имеющейся в базе данных продукции.
 
@@ -219,6 +237,7 @@ select model,price from pc)
 select model from model_out where price = all (select max(price) from model_out)
 group by model
 
+
 Задание: 25
 Найдите производителей принтеров, которые производят ПК с наименьшим объемом RAM и с самым быстрым процессором среди всех ПК, имеющих наименьший объем RAM. Вывести: Maker
 
@@ -230,12 +249,40 @@ pc.speed = (select max(speed) from pc where ram=(select min(ram) from pc)) and
 p.maker in ( select maker from product where type='printer')
 
 
+<<<<<<< HEAD
 Задание: 28
 Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
+=======
+Задание: 26 
+Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A (латинская буква). Вывести: одна общая средняя цена.
+
+select AVG(price) as price
+from
+(select price from PC 
+join product p on p.model=pc.model
+where maker = 'A'
+union all
+select price from laptop l 
+join product p on p.model=l.model
+where maker = 'A') as s
+
+Задание: 27
+Найдите средний размер диска ПК каждого из тех производителей, которые выпускают и принтеры. Вывести: maker, средний размер HD.
+
+
+
+Задание: 28
+Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
+
+>>>>>>> SQL
 Select count(distinct maker) as kol
 From product
 Where maker in (select maker 
 from product group by maker having count (model)=1)
+<<<<<<< HEAD
+=======
+
+>>>>>>> SQL
 
 
 
