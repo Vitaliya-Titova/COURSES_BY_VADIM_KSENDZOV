@@ -1,0 +1,231 @@
+                                         The requirements
+
+1    Required fields:            Name, Email, Password
+2    Fields Name , Surname       Latin letters only
+     accept:                     Digits
+                                 Special symbols: "-", "_" "space"
+                                 Max: 256 characters
+                                 Min: 2 characters
+                                 Letter case any
+                                 The first character must be a letter (numbers and symbols cannot be the first)
+                                 The last character can be any
+3    Field Email                 Contains @ and standard checks
+4    Field Password              Max: 16 characters
+                                 Min: 5 characters
+                                 Latin letters only
+                                 The minimum must include: 1 uppercase letter, 1 lowercase, 1 digit.
+                                 Special symbols do not accept
+5  If the required field is left empty, it should be surrounded by a red frame and display the message: "This field is required"
+
+                                            Check-List
+
+     Build                       1.0
+     Environment                 Windows 10
+     Browser                     Google Chrome Version 90.0.4430.212
+     Test date                   30.05.2021
+     Tester                      Titova V.
+
+№ Checking                       Input                                   Result
+                                 Field Name
+
+1    Empty field                                                         pass
+2    Latin name                  Vita                                    pass
+3    Cyrillic name               Вита                                    fail
+4    Double latin name with a
+     space                       Vita Anna                               pass
+5    Double latin name with a
+     dash                        Vita-Anna                               pass
+6    Double latin name with an
+     underscore                  Vita_Anna                               pass
+7    Latin name with a digit     Vita1                                   pass
+8    Latin name with a dash      Vita-                                   pass
+9    Latin name with an
+     underscore                  Vita_                                   pass
+10 Latin name with a space       Vita                                    pass
+11 Compound name                 vita anna anabel marya                  pass
+12 Underscores                   ______                                  fail
+13 Dash                          ---------                               fail
+14 Spaces                                                                fail
+15 Digits                        12345                                   fail
+16 Special symbols               $%^&*(                                  fail
+17 A digit and Latin name        1Vita                                   fail
+18 An underscore and Latin
+   name                          _vita                                   fail
+19 A dash and Latin name         -vita                                   fail
+20 Special symbols and Latin
+   name                          %vita                                   fail
+21 Spaces and Latin name          Vita                                   fail
+22 One Latin letter              V                                       pass
+23 Two Latin letters             Vi                                      fail
+24 Three Latin letters           Vit                                     fail
+25 Enter 127 Latin letters                                               fail
+26 Enter 255 Latin letters                                               fail
+27 Enter 256 Latin letters                                               fail
+28 Enter 257 Latin letters                                               pass
+29 Сapital letters               VITA                                    pass
+30 Lowercase letters             vita                                    pass
+31 Tags                          <b>Vita</b>                             pass
+32 Cross-site scripting          <script>alert("I hacked this!")</script>   pass
+33 Emoji                         Any emoji from the Emoji Panel          pass
+34 Clipboard                     Input from clipboard                    pass
+35 SQL query                     SELECT * FROM blog WHERE code
+                                 LIKE ‘a%’;                              pass
+
+                                Field Surname
+36 Empty field                                                           fail
+37 Latin surname                 Titova                                  pass
+38 Cyrillic surname              Титова                                  fail
+39 Double latin surname with a
+   space                         Titova James                            pass
+40 Double latin surname with a
+   dash                          Titova-James                            pass
+41 Double latin surname with
+   an underscore                 Titova_James                            pass
+42 Latin surname with digits     Titova123                               pass
+43 Latin surname with a dash     Titova-                                 pass
+44 Latin surname with an
+   underscore                    Titova_                                 pass
+45 Latin surname with spaces     Titova                                  pass
+46 Compound surname              titova james wang                       pass
+47 Underscores                   ______                                   fail
+48 Dashes                        ---------                                fail
+49 Spaces                                                                 pass
+50 Digits                        12345                                    fail
+51 Special symbols               $%^&*(                                   fail
+52 A digit and Latin surname     1titova                                  fail
+53 An underscore and Latin
+   surname                       _Titova                                  fail
+54 A dash and Latin surname      -Titova                                  fail
+55 Special symbols and Latin
+   name                          %Titova                                  fail
+56 Spaces and Latin name         Titova                                   fail
+57 One Latin letter              t                                        fail
+58 Two Latin letters             ti                                       pass
+59 Three Latin letters           tit                                      pass
+60 Enter 127 Latin letters                                                pass
+61 Enter 255 Latin letters                                                pass
+62 Enter 256 Latin letters                                                pass
+63 Enter 257 Latin letters                                                fail
+64 Сapital letters               TITOVA                                   pass
+65 Lowercase letters             titova                                   pass
+66 Tags                          <b>Titova</b>                            pass
+67 Cross-site scripting          <script>alert("I hacked this!")</script> fail
+68 Emoji                         Any emoji from the Emoji Panel           fail
+69 Clipboard                     Input from clipboard                     pass
+70 SQL query                     SELECT * FROM blog WHERE code
+                                 LIKE ‘a%’;                               fail
+
+                                 Field email
+71 Valid email                   vitaliya7-5@mail.ru                      pass
+72 Empty field                                                            fail
+73 Email in Latin lowercase      vitaliya@mail.ru                         pass
+74 Email in Latin uppercase      VITALIYA@MAIL.RU                         pass
+75 Local part with a digit       7vita@mail.ru                            pass
+76 Local part with a dash        vi-ta@mail.ru                            pass
+77 Local part starts with a dash -vita@mail.ru                            fail
+78 Local part starts with an
+   underscore                    _vita@mail.ru                            fail
+79 Local part ends with a dash   vita-@mail.ru                            fail
+80 Local part with an
+   underscore                    vi_ta@mail.ru                            pass
+81 Local part with a dot         vi.ta@mail.ru                            pass
+82 Local part starts with a dot  .vita@mail.ru                            fail
+83 Local part ends with a dot    vita.@mail.ru                            fail
+84 Local part with 2 dots in a
+   row                           vita..liya@mail.ru                       fail
+85 Local part consists of digits 1234567@mail.ru                          pass
+86 Local part consists of
+   special characters            !#$%&@mail.ru                            fail
+87 Local part in Cyrillic        витатитова@mail.ru                       fail
+88 Local part consists of
+   spaces                                   @mail.ru                      fail
+89 Spaces inside the local part  vita tit ova@mail.ru                     fail
+90 Email without @               vitaliya7-5mail.ru                       fail
+91 Email with two @              vitaliya7-5@@mail.ru                     fail
+92 Email with two @ not
+   standing next to each other   vitaliya7-5@g@mail.com                   fail
+93 IP-address in the domain
+   part                          jsmith@[192.168.2.1]                     pass
+94 Domain part in Cyrillic       vitaliya7-5@маил.ру                      fail
+95 Domain part contains          vitaliya7-5@ma№%l.ru?                    fail
+   special characters
+96 Domain part consists of
+   digits                        vitaliya7-5@1234567.66                   fail
+97 Domain part consists of
+   spaces                        vitaliya7-5@                             fail
+98 Domain part without dot       vitaliya7-5@mailru                       fail
+99 Domain part with 2 dots in a
+   row                           vitaliya7-5@mail..ru                     fail
+100 Domain part ending with a
+   dash                          vitaliya7-5@mail.ru-                     fail
+101 Domain part contains an
+   underscore                    vitaliya7-5@g-mail.com                   fail
+102 Empty local and domain
+   parts                         @                                        fail
+103 Valid address with a leading
+    space                         vitaliya7-5@mail.ru                     fail
+104 Valid address with a trailing
+    space                         vitaliya7-5@mail.ru                     fail
+105 Cross-site scripting          <script>alert("I hacked this!")</script> fail
+106 Emoji                         Any emoji from the Emoji Panel           fail
+107 Clipboard                     Input from clipboard                     pass
+
+                                   Field password
+108 Empty field                                                               fail
+109 Latin characters (one of
+    them capital) and a digit        Qwuytert1                                pass
+110 4 characters (3 Latin letters
+    (some of them capital) and
+    a digit )                        Qwr1                                     fail
+111 5 characters (Latin letters
+    (some of them capital) and
+    digits )                         Qwr15                                    pass
+112 6 characters (Latin letters
+    (some of them capital) and
+    digits )                         fgQyt6                                   pass
+113 15 characters (Latin letters
+    (some of them capital) and
+    digits                           qwe123RTqweasdf                          pass
+114 16 characters (Latin letters
+    (some of them capital) and
+    digits )                         QWER123asdfghjkl                         pass
+115 17 characters (Latin letters
+    (some of them capital) and
+    digits )                         QWER123asdfghjkl9                        fail
+116 9 characters (Latin letters
+    (some of them capital) and
+    digits )                         qweQWE123                                pass
+117 Lowercase letters                dfghjklfgh                               fail
+118 Lowercase letters and digits     qwert1234                                fail
+119 Lowercase and capital
+    letters                          qwerQWER                                 fail
+120 Capital letters                  QWWERTY                                  fail
+121 Capital letters and digits       QWEER1234                                fail
+122 Digits                           1234567                                  fail
+123 Special symbols                  @#$%^&*                                  fail
+124 Special symbols and valid
+    password                         fgQyt6*                                  fail
+125 Cyrillic letters                 ывапапро                                 fail
+126 Cyrillic letters (one of them
+    capital) and digits              Апролд7                                  fail
+127 Spaces                                                                    fail
+128 Valid password with a space      qwe QWE123                               fail
+129 Cross-site scripting             <script>alert("I hacked this!")</script>  fail
+130 Emoji                            Any emoji from the Emoji Panel           pass
+131 Clipboard                        Input from clipboard                     pass
+
+                                     Button Submit
+132 Click on the button                                                       pass
+133 Hover over button                                                         pass
+134 Double click on the button                                                pass
+135 Click around the button in
+    several places                                                            pass
+
+				GUI& Usability Testing
+136 No spelling and grammatical errors, all                                   fail
+    pages have correct titles.         
+137 Alignment of pictures, fonts,texts.                                       pass
+138 Check the site at different screen resolutions.                           pass		      
+139 Placeholders in fields.                                                   pass
+140 Сheck required fields "*"                                                 fail
+141 There is "password confirmation" field.                                   fail
