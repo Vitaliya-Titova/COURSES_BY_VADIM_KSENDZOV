@@ -249,10 +249,6 @@ pc.speed = (select max(speed) from pc where ram=(select min(ram) from pc)) and
 p.maker in ( select maker from product where type='printer')
 
 
-<<<<<<< HEAD
-Задание: 28
-Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
-=======
 Задание: 26 
 Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A (латинская буква). Вывести: одна общая средняя цена.
 
@@ -274,16 +270,10 @@ where maker = 'A') as s
 Задание: 28
 Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
 
->>>>>>> SQL
 Select count(distinct maker) as kol
 From product
 Where maker in (select maker 
 from product group by maker having count (model)=1)
-<<<<<<< HEAD
-=======
-
->>>>>>> SQL
-
 
 
 
