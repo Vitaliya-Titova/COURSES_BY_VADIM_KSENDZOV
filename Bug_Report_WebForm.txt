@@ -1,0 +1,241 @@
+﻿                                         Bug-reports
+
+
+№: 1
+Title: (что, где, при каких условиях) Например ([cc web] Не загрузилась страница такая-то  при клике на такую-то кнопку )
+Precondition: (условия, входные данные)
+Environment: (браузер, ОС, )
+Steps:
+AR:
+ER:
+Attachments:
+======================================================================
+
+
+№: 1
+Title: Successful registration when entering Cyrillic letters in the field “Name”
+Precondition 1. Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Name” Cyrillic letters Виталия
+2. Enter valid data in the Surname, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent.Notification  is displayed: Success! Hello: Виталия Titova 
+Severity: Major 
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 2
+Title: Successful registration when entering forbidden symbols in the field “Name”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Name” forbidden symbols $%^&*(
+2. Enter valid data in the Surname, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent.Notification  is displayed: Success! Hello: $%^&*( Titova 
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 3
+Title: Successful registration when entering space in the field “Name”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Name” space
+2. Enter valid data in the Surname, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent.Notification  is displayed: Success! Hello:  Titova 
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+№: 4
+Title: Successful registration when entering the first dash in the field “Surname”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Surname” -Titova
+2. Enter valid data in the Name, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya -Titova 
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 5
+Title: Successful registration when entering one Latin letter in the field “Surname”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Surname” T
+2. Enter valid data in the Name, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya T 
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 6
+Title: Successful registration when entering Emoji in the field “Surname”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Surname” Emoji (press and hold the "Windows" button and (.))
+2. Enter valid data in the Name, Email, Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya 😊
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 7
+Title: Successful registration when entering local part of mail in Cyrillic in the field “Email”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Email” витатитова@mail.ru
+2. Enter valid data in the Name, Surname,  Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Major
+Status: Open
+Tester: Titova V
+
+
+
+
+№: 8
+Title: Successful registration when entering local part of mail contains two dots in a row  in the field “Email”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Email” vita..liya@mail.ru
+2. Enter valid data in the Name, Surname,  Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 9
+Title: Successful registration when entering @  without domain and local part in the field “Email”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Email”  only @
+2. Enter valid data in the Name, Surname,  Password fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Critical 
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 10
+Title: Successful registration  without filling in the password field
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter valid data in the Name, Surname,  Email fields
+2. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Critical
+Status: Open
+Tester: Titova V.
+
+
+
+
+№: 11
+Title: Successful registration when entering spaces in the field “Password”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Password” space
+2. Enter valid data in the Name, Surname,  Email fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+
+
+
+№: 12
+Title: Successful registration when entering 17 characters in the field “Password”
+Precondition:  Open http://itcareer.pythonanywhere.com/
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 
+1. Enter in the field “Password”QWER123asdfghjkl9
+2. Enter valid data in the Name, Surname,  Email fields
+3. Click the "Submit" button 
+Expected result: Notice "Error: Field Not Filled" under the completed form
+Аctual result: Registration form is sent. Notification  is displayed: Success! Hello: Vitaliya Titova
+Severity: Major
+Status: Open
+Tester: Titova V.
+
+
+
+№: 13
+Title: The field  header "Surname" is "Surame" on WebForm
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 1. Open http://itcareer.pythonanywhere.com/
+Expected result: Header “Surname”
+Аctual result: Header “Surame”
+Severity: Trivial
+Status: Open
+Tester: Titova V.
+Attachments: https://monosnap.com/file/A6CSopiWK8RHYT4l0EPnq0QtxG0IyF 
+
+
+
+
+№: 14
+Title: Required  fields are not marked on WebForm
+Environment: Windows 10 , Google Chrome Version 90.0.4430.212
+Steps: 1. Open http://itcareer.pythonanywhere.com/
+Expected result: Required fields are marked with asterisk (*)
+Аctual result: Required fields are not marked
+Severity: Minor
+Status: Open
+Tester: Titova V.
+Attachments: https://monosnap.com/file/13U4v9o1akkeHOojBHblpfmlEcejcU
