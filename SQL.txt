@@ -262,6 +262,7 @@ select price from laptop l
 join product p on p.model=l.model
 where maker = 'A') as s
 
+
 Задание: 27
 Найдите средний размер диска ПК каждого из тех производителей, которые выпускают и принтеры. Вывести: maker, средний размер HD.
 select p.maker, avg(pc.hd) as sr
@@ -291,13 +292,37 @@ Income(code, point, date, inc)
 Outcome(code, point, date, out)
 Здесь также значения столбца date не содержат времени.
 
+
 Задание: 29
 В предположении, что приход и расход денег на каждом пункте приема фиксируется не чаще одного раза в день [т.е. первичный ключ (пункт, дата)], написать запрос с выходными данными (пункт, дата, приход, расход). Использовать таблицы Income_o и Outcome_o.
 
+select  distinct i.point, i.date, inc, out
+from Income_o I
+left join Outcome_o  O on  i.date=O.date and
+O.point=I.point
+union 
+select distinct O.point, O.date, i.inc, O.out
+from Outcome_o O 
+left join Income_o I  on  i.date=O.date and
+O.point=I.point
+
+
+Задание: 30
+В предположении, что приход и расход денег на каждом пункте приема фиксируется произвольное число раз (первичным ключом в таблицах является столбец code), требуется получить таблицу, в которой каждому пункту за каждую дату выполнения операций будет соответствовать одна строка.
+Вывод: point, date, суммарный расход пункта за день (out), суммарный приход пункта за день (inc). Отсутствующие значения считать неопределенными (NULL).
+
+with res(point, date, inc, out) 
+as(
+select point, date, null, inc from Income
+union all
+select point, date, out, null from  Outcome)
+select distinct point, date, sum(inc), sum(out) from res
+group by point, date
 
 
 
-Краткая информация о базе данных "Корабли":
+
+                                              Краткая информация о базе данных "Корабли":
 
 Рассматривается БД кораблей, участвовавших во второй мировой войне. Имеются следующие отношения:
 Classes (class, type, country, numGuns, bore, displacement)
@@ -311,7 +336,16 @@ Outcomes (ship, battle, result)
 
 Задание: 14 
 Найдите класс, имя и страну для кораблей из таблицы Ships, имеющих не менее 10 орудий.
+
 Select distinct s.class, s.name, c.country
 from classes c
 Join ships s on s.class= c.class
 Where c.numGuns>=10
+
+
+Задание: 31 
+Для классов кораблей, калибр орудий которых не менее 16 дюймов, укажите класс и страну.
+Select distinct class, country 
+from classes
+where 
+bore >=16
