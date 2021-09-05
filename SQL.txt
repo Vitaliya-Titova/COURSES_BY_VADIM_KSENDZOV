@@ -1,4 +1,4 @@
-  Упражнения по SQL  / https://www.sql-ex.ru/ 
+Упражнения по SQL  / https://www.sql-ex.ru/ - MySQL
 
 Схема БД состоит из четырех таблиц:
 Product(maker, model, type)
